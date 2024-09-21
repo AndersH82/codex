@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/auth/registration/', {
+      await axiosInstance.post('/auth/registration/', {
         username,
         password1,
         password2,
