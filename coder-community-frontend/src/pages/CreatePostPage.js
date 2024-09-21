@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 const CreatePostPage = () => {
   const [content, setContent] = useState('');
@@ -16,10 +16,8 @@ const CreatePostPage = () => {
     }
 
     try {
-      const token = localStorage.getItem('token');
-      await axios.post('/api/posts/', formData, {
+      await axiosInstance.post('/posts/', formData, {
         headers: {
-          Authorization: `Token ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
