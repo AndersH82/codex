@@ -43,6 +43,16 @@ const PostDetailPage = () => {
     }
   };
 
+  const handleLikePost = async () => {
+    try {
+      await axiosInstance.post('/likes/', { post: id });
+      const response = await axiosInstance.get(`/posts/${id}/`);
+      setPost(response.data);
+    } catch (error) {
+      console.error('Failed to like post', error);
+    }
+  };
+
   if (!post) return <div>Loading...</div>;
 
   return (
@@ -50,6 +60,7 @@ const PostDetailPage = () => {
       <h2>Post Detail</h2>
       <p>{post.content}</p>
       {post.image && <img src={post.image} alt="Post" />}
+      <button onClick={handleLikePost}>Like</button>
       <h3>Comments</h3>
       <ul>
         {comments.map((comment) => (
