@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/login/', {
+      const response = await axiosInstance.post('/auth/login/', {
         username,
         password,
       });
