@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 const PostDetailPage = () => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const PostDetailPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/api/posts/${id}/`);
+        const response = await axiosInstance.get(`/posts/${id}/`);
         setPost(response.data);
       } catch (error) {
         console.error('Failed to fetch post', error);
@@ -20,7 +20,7 @@ const PostDetailPage = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`/api/comments/?post=${id}`);
+        const response = await axiosInstance.get(`/comments/?post=${id}`);
         setComments(response.data);
       } catch (error) {
         console.error('Failed to fetch comments', error);
@@ -34,18 +34,9 @@ const PostDetailPage = () => {
   const handleAddComment = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        '/api/comments/',
-        { post: id, content: newComment },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      );
+      await axiosInstance.post('/comments/', { post: id, content: newComment });
       setNewComment('');
-      const response = await axios.get(`/api/comments/?post=${id}`);
+      const response = await axiosInstance.get(`/comments/?post=${id}`);
       setComments(response.data);
     } catch (error) {
       console.error('Failed to add comment', error);
