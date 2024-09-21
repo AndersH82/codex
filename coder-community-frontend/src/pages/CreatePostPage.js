@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
 
 const CreatePostPage = () => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const CreatePostPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      history.push('/posts');
+      navigate('/posts');
     } catch (error) {
       console.error('Failed to create post', error);
     }

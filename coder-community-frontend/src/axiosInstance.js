@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000/api', // Adjust the base URL as needed
+  baseURL: 'https://codex-api-3f893f5716ef.herokuapp.com/', // Adjust the base URL as needed
 });
 
 axiosInstance.interceptors.request.use(

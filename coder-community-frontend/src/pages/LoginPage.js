@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const LoginPage = () => {
         password,
       });
       localStorage.setItem('token', response.data.key);
-      history.push('/posts');
+      navigate('/posts');
     } catch (error) {
       console.error('Login failed', error);
     }

@@ -1,21 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import PostPage from './pages/PostPage';
 import PostDetailPage from './pages/PostDetailPage';
+import CreatePostPage from './pages/CreatePostPage';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/posts/:id" component={PostDetailPage} />
-        <Route path="/posts" component={PostPage} />
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/posts/new" element={<CreatePostPage />} />
+        <Route path="/posts/:id" element={<PostDetailPage />} />
+        <Route path="/posts" element={<PostPage />} />
+      </Routes>
     </Router>
   );
 }

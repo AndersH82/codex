@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosInstance';
 
 const RegisterPage = () => {
@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [email, setEmail] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const RegisterPage = () => {
         password2,
         email,
       });
-      history.push('/login');
+      navigate('/login');
     } catch (error) {
       console.error('Registration failed', error);
     }
